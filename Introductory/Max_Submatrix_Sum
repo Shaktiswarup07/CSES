@@ -1,0 +1,27 @@
+#include <bits/stdc++.h> 
+int maxSubArrayKadane(vector<int>&arr){
+	int maxi=INT_MIN;
+	int sum=0;
+	for(int i = 0 ; i < arr.size() ; i++){
+		sum+=arr[i];
+		maxi=max(maxi,sum);
+		if(sum<0){
+			sum=0;
+		}
+	}
+	return maxi;
+}
+int maxSumSubmatrix(vector<vector<int>>& mat, int n, int m) {
+	// Write your code here.
+	int maxi=INT_MIN;
+	for(int i = 0 ; i < m ; i++){
+		vector<int>arr(n,0);
+		for(int j = i ; j < m ; j++){
+			for(int k = 0 ; k < n ; k++){
+				arr[k]+=mat[k][j];
+			}
+			maxi=max(maxi,maxSubArrayKadane(arr));
+		}
+	}
+	return maxi;
+}
